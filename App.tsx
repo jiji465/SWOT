@@ -8,6 +8,7 @@ import { Header } from './components/Header';
 import { PresentationFrame } from './components/PresentationFrame';
 import { DynamicBackground } from './components/DynamicBackground';
 import { AiChat } from './components/AiChat';
+import { SettingsPanel } from './components/SettingsPanel';
 import { 
   LightbulbIcon, 
   ThumbsUpIcon, 
@@ -16,7 +17,7 @@ import {
   CheckCircleIcon,
   SparklesIcon
 } from './components/IconComponents';
-import { PresentationSlide } from './types';
+import { PresentationSlide, SwotColors } from './types';
 
 const App: React.FC = () => {
   const [slideIndex, setSlideIndex] = useState(0);
@@ -24,7 +25,22 @@ const App: React.FC = () => {
   const [animationKey, setAnimationKey] = useState(0);
   const [backgroundKey, setBackgroundKey] = useState('intro');
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [direction, setDirection] = useState(0);
+
+  const [swotColors, setSwotColors] = useState<SwotColors>({
+    strengths: '#15803d',
+    weaknesses: '#e1680d',
+    opportunities: '#2563eb',
+    threats: '#dc2626'
+  });
+
+  const handleColorChange = (quadrant: keyof SwotColors, newColor: string) => {
+    setSwotColors(prevColors => ({
+      ...prevColors,
+      [quadrant]: newColor
+    }));
+  };
 
   const slideSteps = useMemo(() => PRESENTATION_SLIDES.map(slide => 
     slide.type === 'swot-matrix' ? 4 : 1
@@ -76,7 +92,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (isChatOpen) return;
+      if (isChatOpen || isSettingsOpen) return;
       if (event.key === 'ArrowRight' && currentStep < totalSteps) {
         handleNext();
       } else if (event.key === 'ArrowLeft' && currentStep > 1) {
@@ -87,7 +103,7 @@ const App: React.FC = () => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [slideIndex, subStep, isChatOpen]);
+  }, [slideIndex, subStep, isChatOpen, isSettingsOpen]);
 
   const slideVariants = {
     hidden: (direction: number) => ({
@@ -117,19 +133,19 @@ const App: React.FC = () => {
       
       case 'swot-matrix':
         const swotConfig = {
-            strengths: { data: SWOT_DATA.strengths, icon: <ThumbsUpIcon />, color: 'accent-green', position: 'top-left' as const },
-            weaknesses: { data: SWOT_DATA.weaknesses, icon: <ThumbsDownIcon />, color: 'accent-orange', position: 'top-right' as const },
-            opportunities: { data: SWOT_DATA.opportunities, icon: <LightbulbIcon />, color: 'accent-blue', position: 'bottom-left' as const },
-            threats: { data: SWOT_DATA.threats, icon: <AlertTriangleIcon />, color: 'accent-red', position: 'bottom-right' as const },
+            strengths: { data: SWOT_DATA.strengths, icon: <ThumbsUpIcon />, color: swotColors.strengths, position: 'top-left' as const },
+            weaknesses: { data: SWOT_DATA.weaknesses, icon: <ThumbsDownIcon />, color: swotColors.weaknesses, position: 'top-right' as const },
+            opportunities: { data: SWOT_DATA.opportunities, icon: <LightbulbIcon />, color: swotColors.opportunities, position: 'bottom-left' as const },
+            threats: { data: SWOT_DATA.threats, icon: <AlertTriangleIcon />, color: swotColors.threats, position: 'bottom-right' as const },
         };
         return (
             <div>
                 <h2 className="text-4xl font-bold text-center mb-10 text-white [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Matriz SWOT</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <SwotCard isVisible={subStep >= 0} position={swotConfig.strengths.position} title={swotConfig.strengths.data.title} items={swotConfig.strengths.data.items} icon={swotConfig.strengths.icon} colorClass={swotConfig.strengths.color} />
-                    <SwotCard isVisible={subStep >= 1} position={swotConfig.weaknesses.position} title={swotConfig.weaknesses.data.title} items={swotConfig.weaknesses.data.items} icon={swotConfig.weaknesses.icon} colorClass={swotConfig.weaknesses.color} />
-                    <SwotCard isVisible={subStep >= 2} position={swotConfig.opportunities.position} title={swotConfig.opportunities.data.title} items={swotConfig.opportunities.data.items} icon={swotConfig.opportunities.icon} colorClass={swotConfig.opportunities.color} />
-                    <SwotCard isVisible={subStep >= 3} position={swotConfig.threats.position} title={swotConfig.threats.data.title} items={swotConfig.threats.data.items} icon={swotConfig.threats.icon} colorClass={swotConfig.threats.color} />
+                    <SwotCard isVisible={subStep >= 0} position={swotConfig.strengths.position} title={swotConfig.strengths.data.title} items={swotConfig.strengths.data.items} icon={swotConfig.strengths.icon} color={swotConfig.strengths.color} />
+                    <SwotCard isVisible={subStep >= 1} position={swotConfig.weaknesses.position} title={swotConfig.weaknesses.data.title} items={swotConfig.weaknesses.data.items} icon={swotConfig.weaknesses.icon} color={swotConfig.weaknesses.color} />
+                    <SwotCard isVisible={subStep >= 2} position={swotConfig.opportunities.position} title={swotConfig.opportunities.data.title} items={swotConfig.opportunities.data.items} icon={swotConfig.opportunities.icon} color={swotConfig.opportunities.color} />
+                    <SwotCard isVisible={subStep >= 3} position={swotConfig.threats.position} title={swotConfig.threats.data.title} items={swotConfig.threats.data.items} icon={swotConfig.threats.icon} color={swotConfig.threats.color} />
                 </div>
             </div>
         );
@@ -177,7 +193,7 @@ const App: React.FC = () => {
   return (
     <>
       <DynamicBackground backgroundKey={backgroundKey} />
-      <Header />
+      <Header onOpenSettings={() => setIsSettingsOpen(true)} />
       <PresentationFrame
         title={PRESENTATION_SLIDES[slideIndex].title}
         currentStep={currentStep}
@@ -228,6 +244,13 @@ const App: React.FC = () => {
               />
           )}
       </AnimatePresence>
+
+      <SettingsPanel
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+        colors={swotColors}
+        onColorChange={handleColorChange}
+      />
     </>
   );
 };

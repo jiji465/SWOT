@@ -24,3 +24,10 @@ export type PresentationSlide =
   | { type: 'priorities'; title: string; }
   | { type: 'tows'; index: number; title: string; }
   | { type: 'conclusion'; title: string; };
+
+export interface SwotColors {
+  strengths: string;
+  weaknesses: string;
+  opportunities: string;
+  threats: string;
+}

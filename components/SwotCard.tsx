@@ -6,7 +6,7 @@ interface SwotQuadrantProps {
   title: string;
   items: string[];
   icon: React.ReactElement<{ className?: string }>;
-  colorClass: string;
+  color: string;
   isVisible: boolean;
   position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 }
@@ -26,8 +26,7 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
-export const SwotCard: React.FC<SwotQuadrantProps> = ({ title, items, icon, colorClass, isVisible, position }) => {
-  const borderClass = `border-${colorClass}`;
+export const SwotCard: React.FC<SwotQuadrantProps> = ({ title, items, icon, color, isVisible, position }) => {
 
   const positionVariants = {
     'top-left': { x: -20, y: -20 },
@@ -40,7 +39,8 @@ export const SwotCard: React.FC<SwotQuadrantProps> = ({ title, items, icon, colo
 
   return (
     <motion.div 
-      className={`flex flex-col bg-card text-card-foreground rounded-lg shadow-lg p-6 border-l-4 ${borderClass}`}
+      className={`flex flex-col bg-card text-card-foreground rounded-lg shadow-lg p-6 border-l-4`}
+      style={{ borderLeftColor: color }}
       initial={{ opacity: 0, x: initialPos.x, y: initialPos.y }}
       animate={{
         opacity: isVisible ? 1 : 0,
@@ -50,7 +50,7 @@ export const SwotCard: React.FC<SwotQuadrantProps> = ({ title, items, icon, colo
       transition={{ type: "spring", stiffness: 260, damping: 20 }}
     >
       <div className="flex items-center mb-4">
-        <div className={`text-${colorClass} mr-3`}>
+        <div style={{ color }} className={`mr-3`}>
           {React.cloneElement(icon, { className: "h-7 w-7" })}
         </div>
         <h3 className="text-xl font-bold">{title}</h3>
@@ -63,7 +63,7 @@ export const SwotCard: React.FC<SwotQuadrantProps> = ({ title, items, icon, colo
       >
         {items.map((item, index) => (
           <motion.li key={index} className="flex items-start" variants={itemVariants}>
-            <span className={`flex-shrink-0 font-semibold text-${colorClass} mr-2 mt-1`}>•</span>
+            <span style={{ color }} className={`flex-shrink-0 font-semibold mr-2 mt-1`}>•</span>
             <span className="text-muted-foreground text-base">{item}</span>
           </motion.li>
         ))}
