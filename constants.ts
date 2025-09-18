@@ -4,45 +4,46 @@ export const SWOT_DATA: SwotData = {
   strengths: {
     title: "Forças",
     items: [
-      "Crescimento de receita de 25% ano a ano (YoY).",
-      "Marca líder no Nordeste (35% de market share).",
-      "Aumento de 40% na capacidade produtiva após investimento em nova linha."
+      "Crescimento consistente de receita (crescimento de R$12 milhões em 2 anos).",
+      "Marca reconhecida no Nordeste e início de presença no Sudeste.",
+      "Crescente constante da capacidade produtiva (7% em 2 anos).",
     ],
   },
   weaknesses: {
     title: "Fraquezas",
     items: [
-      "Queda da margem operacional de 15% para 11% em 12 meses.",
-      "80% dos insumos-chave são importados, expostos à volatilidade cambial.",
-      "ERP legado sem integração, causando 20% de ineficiência em logística.",
-      "Alto turnover na fábrica (24% a.a.), gerando custos elevados de treinamento."
+      "Margem operacional em queda (queda de 3% em 2 anos).",
+      "Dependência de insumos importados (amêndoa: aprimoximadamente 70%).",
+      "ERP antigo que limita gestão de estoque e planejamento.",
+      "Dependência de um único co-packer para iogurtes.",
+      "Alto turnover na fábrica (24%).",
     ],
   },
   opportunities: {
     title: "Oportunidades",
     items: [
-      "Mercado flexitariano crescendo 15% ao ano no Sudeste.",
-      "Potencial de redução de 30% no custo de TI com ERPs em nuvem.",
-      "Acesso a linhas de crédito com juros de CDI + 2% para expansão.",
-      "Capacidade ociosa de 25% disponível para novas linhas de produtos."
+      "Expansão do público flexitariano no Brasil.",
+      "ERPs em nuvem mais acessíveis; melhorias em fermentação/texturização.",
+      "Linhas de crédito acessíveis.",
+      "Potencial de aumentar a capacidade produtiva (em crescimento, mas ainda baixa).",
     ],
   },
   threats: {
     title: "Ameaças",
     items: [
-      "Variação cambial de 10% impacta 5% na margem bruta.",
-      "Risco regulatório sobre o uso do termo “leite”, podendo exigir rebranding.",
-      "Quebra de 40% na safra de aveia nacional, elevando custos.",
-      "Aumento de 5% no preço resulta em queda de 10% na demanda (alta elasticidade)."
+      "Câmbio volátil (impactando insumos importados).",
+      "Discussões regulatórias sobre o uso da palavra “leite” em bebidas vegetais.",
+      "Seca que pode afetar a produção de aveia nacional.",
+      "Consumidores sensíveis a preço e rótulos.",
     ],
   },
 };
 
 export const STRATEGIC_PRIORITIES: string[] = [
-  "Ampliar a rede de fornecedores de insumos (KPI: Reduzir dependência de um fornecedor para <50% por insumo).",
-  "Aumentar a margem operacional (KPI: Aumentar margem de 11% para 14%).",
-  "Internalizar parte da produção (KPI: Internalizar 30% do volume de co-packing).",
-  "Expandir a penetração de mercado no Sudeste (KPI: Atingir 5% de market share na região)."
+  "Ampliar sua rede de fornecedores de insumo e embalagem a fim de aumentar sua segurança operacional.",
+  "Reduzir custos e aumentar margem operacional (via eficiência logística, renegociação com fornecedores e atualização do ERP).",
+  "Diminuir dependência de insumos e parceiros únicos (diversificação de fornecedores e busca de novos co-packers).",
+  "Expandir a penetração no Sudeste (fortalecer marketing, degustações e parcerias com cafeterias e hotéis)."
 ];
 
 
@@ -50,38 +51,38 @@ export const TOWS_STRATEGIES: TowsStrategy[] = [
     {
         type: 'SO',
         title: 'SO: Expansão Agressiva no Sudeste',
-        strategy: 'Alavancar a liderança da marca no Nordeste para penetrar no mercado do Sudeste, que está em forte crescimento, visando atingir nosso KPI de market share na região.',
-        rationale: 'Acelerar a entrada via canais estratégicos (food service, cafeterias) para capturar valor no mercado de maior poder aquisitivo do país.'
+        strategy: 'Utilizar a marca já reconhecida no Nordeste e o portfólio diversificado para acelerar a entrada no Sudeste, aproveitando o crescimento do público flexitariano.',
+        rationale: 'Reforçar a presença em cafeterias/hotéis e ampliar degustações, consolidando espaço antes da concorrência.'
     },
     {
         type: 'ST',
         title: 'ST: Defesa de Margem e Competitividade',
-        strategy: 'Utilizar a capacidade produtiva ociosa para otimizar custos e oferecer preços competitivos, protegendo a margem contra a volatilidade do câmbio e a concorrência.',
-        rationale: 'A escala de produção reduzirá o custo unitário, fornecendo uma barreira de proteção para a margem operacional, com meta de recuperação da margem.'
+        strategy: 'Explorar a capacidade ociosa e eficiência produtiva para oferecer preços mais competitivos diante da entrada de multinacionais.',
+        rationale: 'Maior escala reduz custos unitários e melhora a margem mesmo em cenário competitivo.'
     },
     {
         type: 'WO',
         title: 'WO: Modernização e Eficiência Operacional',
-        strategy: 'Migrar para um ERP em nuvem para otimizar a gestão de estoques de insumos importados e reduzir ineficiências logísticas, visando a meta de aumento da margem operacional.',
-        rationale: 'Uma gestão de dados centralizada e eficiente é crucial para mitigar a dependência de insumos importados e suportar a expansão de forma lucrativa.'
+        strategy: 'Atualizar o ERP para uma solução em nuvem que melhore planejamento de estoque e visibilidade, reduzindo custos logísticos e aproveitando novas tecnologias acessíveis.',
+        rationale: 'Melhora eficiência interna e libera margem para investir em expansão.'
     },
     {
         type: 'WT',
         title: 'WT: Mitigação de Riscos na Cadeia de Suprimentos',
-        strategy: 'Desenvolver um programa de qualificação e diversificação de fornecedores nacionais de aveia e embalagens, e buscar um segundo co-packer para reduzir a dependência.',
-        rationale: 'Aumentar a resiliência da cadeia de suprimentos contra quebras de safra e volatilidade cambial, garantindo a continuidade da produção.'
+        strategy: 'Diversificar fornecedores de insumos e encontrar mais de um co-packer para reduzir a dependência atual, mitigando riscos de câmbio volátil e gargalos produtivos.',
+        rationale: 'Garante resiliência da operação diante de fatores externos e regulações.'
     },
     {
         type: 'SO',
         title: 'SO: Lançamento de Linha "Zero Açúcar"',
-        strategy: 'Usar a capacidade ociosa para desenvolver e lançar uma linha de produtos “zero açúcar”, mirando o mercado de compras públicas e consumidores health-conscious.',
-        rationale: 'Aproveitar a tendência de saudabilidade e a oportunidade de contratos governamentais para diversificar o portfólio com produtos de maior valor agregado.'
+        strategy: 'Ampliar a linha “zero açúcar” para captar consumidores de editais de compras públicas que demandam opções saudáveis e sem lactose.',
+        rationale: 'Conecta portfólio atual com tendência de políticas públicas e saúde.'
     },
     {
         type: 'WO',
         title: 'WO: Programa de Retenção de Talentos',
-        strategy: 'Implementar um programa estruturado de retenção de talentos (treinamento, plano de carreira, benefícios) para reduzir o alto turnover na fábrica.',
-        rationale: 'Reduzir custos de recrutamento e treinamento e aumentar a produtividade e a qualidade, que são impactadas pela alta rotatividade de pessoal.'
+        strategy: 'Programa interno de retenção de talentos (treinamento, benefícios, clima organizacional) para reduzir turnover.',
+        rationale: 'Mão de obra estável aumenta produtividade e reduz custos de rotatividade.'
     }
 ];
 
