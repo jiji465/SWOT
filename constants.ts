@@ -56,8 +56,8 @@ export const TOWS_STRATEGIES: TowsStrategy[] = [
     {
         type: 'ST',
         title: 'ST: Defesa de Margem e Competitividade',
-        strategy: 'Utilizar a capacidade produtiva ociosa (25%) para otimizar custos e oferecer preços competitivos, protegendo a margem contra a volatilidade do câmbio e a concorrência.',
-        rationale: 'A escala de produção reduzirá o custo unitário, fornecendo uma barreira de proteção para a margem operacional, com meta de retorno a 14%.'
+        strategy: 'Utilizar a capacidade produtiva ociosa para otimizar custos e oferecer preços competitivos, protegendo a margem contra a volatilidade do câmbio e a concorrência.',
+        rationale: 'A escala de produção reduzirá o custo unitário, fornecendo uma barreira de proteção para a margem operacional, com meta de recuperação da margem.'
     },
     {
         type: 'WO',
@@ -74,13 +74,13 @@ export const TOWS_STRATEGIES: TowsStrategy[] = [
     {
         type: 'SO',
         title: 'SO: Lançamento de Linha "Zero Açúcar"',
-        strategy: 'Usar a capacidade ociosa de 25% para desenvolver e lançar uma linha de produtos “zero açúcar”, mirando o mercado de compras públicas e consumidores health-conscious.',
+        strategy: 'Usar a capacidade ociosa para desenvolver e lançar uma linha de produtos “zero açúcar”, mirando o mercado de compras públicas e consumidores health-conscious.',
         rationale: 'Aproveitar a tendência de saudabilidade e a oportunidade de contratos governamentais para diversificar o portfólio com produtos de maior valor agregado.'
     },
     {
         type: 'WO',
         title: 'WO: Programa de Retenção de Talentos',
-        strategy: 'Implementar um programa estruturado de retenção de talentos (treinamento, plano de carreira, benefícios) para reduzir o turnover de 24% na fábrica.',
+        strategy: 'Implementar um programa estruturado de retenção de talentos (treinamento, plano de carreira, benefícios) para reduzir o alto turnover na fábrica.',
         rationale: 'Reduzir custos de recrutamento e treinamento e aumentar a produtividade e a qualidade, que são impactadas pela alta rotatividade de pessoal.'
     }
 ];
