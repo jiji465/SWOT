@@ -1,0 +1,5 @@
+{
+  "name": "SWOT & TOWS Analysis Dashboard",
+  "description": "A web application to visualize a comprehensive SWOT (Strengths, Weaknesses, Opportunities, Threats) and TOWS analysis for strategic business planning, based on provided business data.",
+  "requestFramePermissions": []
+}
