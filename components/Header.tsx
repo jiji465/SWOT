@@ -25,7 +25,7 @@ export const Header: React.FC = () => {
     <div className="absolute top-4 right-4 z-20">
       <button
         onClick={toggleDarkMode}
-        className="p-2 rounded-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary dark:focus:ring-offset-slate-900"
+        className="p-2 rounded-full bg-card/50 backdrop-blur-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring focus:ring-offset-background"
         aria-label="Toggle dark mode"
       >
         {isDarkMode ? <SunIcon /> : <MoonIcon />}

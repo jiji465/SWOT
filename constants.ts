@@ -1,4 +1,3 @@
-
 import type { SwotData, TowsStrategy, PresentationSlide } from './types';
 
 export const SWOT_DATA: SwotData = {
@@ -74,13 +73,13 @@ export const TOWS_STRATEGIES: TowsStrategy[] = [
     },
     {
         type: 'SO',
-        title: 'SO (Extra)',
+        title: 'SO: Expansão da Linha "Zero Açúcar"',
         strategy: 'Ampliar a linha “zero açúcar” para captar consumidores de editais de compras públicas que demandam opções saudáveis e sem lactose.',
         rationale: 'Conecta portfólio atual com tendência de políticas públicas e saúde.'
     },
     {
         type: 'WO',
-        title: 'WO (Extra)',
+        title: 'WO: Programa de Retenção de Talentos',
         strategy: 'Programa interno de retenção de talentos (treinamento, benefícios, clima organizacional) para reduzir turnover.',
         rationale: 'Mão de obra estável aumenta produtividade e reduz custos de rotatividade.'
     }
@@ -90,11 +89,10 @@ export const PRESENTATION_SLIDES: PresentationSlide[] = [
   { type: 'intro', title: 'Apresentação de Análise Estratégica' },
   { type: 'swot-matrix', title: 'Análise SWOT' },
   { type: 'priorities', title: 'Questões Estratégicas Prioritárias' },
-  // FIX: Added an explicit return type to the map callback to ensure the created object conforms to the PresentationSlide union type.
   ...TOWS_STRATEGIES.map((strategy, index): PresentationSlide => ({
     type: 'tows',
     index: index,
-    title: `Estratégia TOWS: ${strategy.title.replace(' (Extra)', '')}`,
+    title: 'Estratégias TOWS',
   })),
   { type: 'conclusion', title: 'Conclusão' },
 ];

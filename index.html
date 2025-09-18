@@ -12,59 +12,125 @@
         theme: {
           extend: {
             colors: {
-              'brand-primary': '#0077B6',
-              'brand-secondary': '#00B4D8',
-              'accent-green': '#2ECC71',
-              'accent-blue': '#3498DB',
-              'accent-orange': '#E67E22',
-              'accent-red': '#E74C3C',
+              border: 'hsl(var(--border))',
+              input: 'hsl(var(--input))',
+              ring: 'hsl(var(--ring))',
+              background: 'hsl(var(--background))',
+              foreground: 'hsl(var(--foreground))',
+              primary: {
+                DEFAULT: 'hsl(var(--primary))',
+                foreground: 'hsl(var(--primary-foreground))',
+              },
+              secondary: {
+                DEFAULT: 'hsl(var(--secondary))',
+                foreground: 'hsl(var(--secondary-foreground))',
+              },
+              destructive: {
+                DEFAULT: 'hsl(var(--destructive))',
+                foreground: 'hsl(var(--destructive-foreground))',
+              },
+              muted: {
+                DEFAULT: 'hsl(var(--muted))',
+                foreground: 'hsl(var(--muted-foreground))',
+              },
+              accent: {
+                DEFAULT: 'hsl(var(--accent))',
+                foreground: 'hsl(var(--accent-foreground))',
+              },
+              popover: {
+                DEFAULT: 'hsl(var(--popover))',
+                foreground: 'hsl(var(--popover-foreground))',
+              },
+              card: {
+                DEFAULT: 'hsl(var(--card))',
+                foreground: 'hsl(var(--card-foreground))',
+              },
+              'accent-green': 'hsl(var(--accent-green))',
+              'accent-blue': 'hsl(var(--accent-blue))',
+              'accent-orange': 'hsl(var(--accent-orange))',
+              'accent-red': 'hsl(var(--accent-red))',
             },
-            keyframes: {
-              'fade-in': {
-                '0%': { opacity: '0' },
-                '100%': { opacity: '1' },
-              },
-              'fade-in-up': {
-                '0%': {
-                  opacity: '0',
-                  transform: 'translateY(20px)',
-                },
-                '100%': {
-                  opacity: '1',
-                  transform: 'translateY(0)',
-                },
-              },
-               'slide-in-up': {
-                '0%': {
-                  opacity: '0',
-                  transform: 'translateY(100%)',
-                },
-                '100%': {
-                  opacity: '1',
-                  transform: 'translateY(0)',
-                },
-              },
-            },
-            animation: {
-              'fade-in': 'fade-in 0.6s ease-out forwards',
-              'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
-              'slide-in-up': 'slide-in-up 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards',
+            borderRadius: {
+              lg: `var(--radius)`,
+              md: `calc(var(--radius) - 2px)`,
+              sm: 'calc(var(--radius) - 4px)',
             },
           },
         },
       }
     </script>
+    <style>
+      :root {
+        --background: 0 0% 100%;
+        --foreground: 222.2 47.4% 11.2%;
+        --card: 0 0% 100%;
+        --card-foreground: 222.2 47.4% 11.2%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 222.2 47.4% 11.2%;
+        --primary: 142.1 76.2% 41%;
+        --primary-foreground: 355.7 100% 97.3%;
+        --secondary: 210 40% 96.1%;
+        --secondary-foreground: 222.2 47.4% 11.2%;
+        --muted: 210 40% 96.1%;
+        --muted-foreground: 215.4 16.3% 46.9%;
+        --accent: 210 40% 96.1%;
+        --accent-foreground: 222.2 47.4% 11.2%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 210 40% 98%;
+        --border: 214.3 31.8% 91.4%;
+        --input: 214.3 31.8% 91.4%;
+        --ring: 142.1 76.2% 41%;
+        --radius: 0.75rem;
+
+        --accent-green: 142.1 76.2% 32%;
+        --accent-blue: 217.2 91.2% 50%;
+        --accent-orange: 30 95% 45%;
+        --accent-red: 0 84.2% 50%;
+      }
+      .dark {
+        --background: 222.2 47.4% 11.2%;
+        --foreground: 210 40% 98%;
+        --card: 222.2 47.4% 11.2%;
+        --card-foreground: 210 40% 98%;
+        --popover: 222.2 47.4% 11.2%;
+        --popover-foreground: 210 40% 98%;
+        --primary: 142.1 76.2% 41%;
+        --primary-foreground: 355.7 100% 97.3%;
+        --secondary: 217.2 32.6% 17.5%;
+        --secondary-foreground: 210 40% 98%;
+        --muted: 217.2 32.6% 17.5%;
+        --muted-foreground: 215 20.2% 65.1%;
+        --accent: 217.2 32.6% 17.5%;
+        --accent-foreground: 210 40% 98%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 210 40% 98%;
+        --border: 217.2 32.6% 17.5%;
+        --input: 217.2 32.6% 17.5%;
+        --ring: 142.1 76.2% 41%;
+
+        --accent-green: 142.1 76.2% 41%;
+        --accent-blue: 217.2 91.2% 59.8%;
+        --accent-orange: 35.8 91.7% 55.2%;
+        --accent-red: 0 84.2% 65.2%;
+      }
+      body {
+        background-color: transparent;
+        color: hsl(var(--foreground));
+      }
+    </style>
   <script type="importmap">
 {
   "imports": {
     "react/": "https://aistudiocdn.com/react@^19.1.1/",
     "react": "https://aistudiocdn.com/react@^19.1.1",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/"
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^11.3.8",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.20.0"
   }
 }
 </script>
 </head>
-  <body class="bg-slate-100 dark:bg-slate-950 transition-colors duration-300">
+  <body class="transition-colors duration-300">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>
