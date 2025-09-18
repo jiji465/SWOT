@@ -50,7 +50,7 @@ export const TOWS_STRATEGIES: TowsStrategy[] = [
     {
         type: 'SO',
         title: 'SO: Expansão Agressiva no Sudeste',
-        strategy: 'Alavancar a marca líder (35% market share NE) para penetrar no mercado do Sudeste, que cresce 15% a.a., visando atingir nosso KPI de 5% de market share regional.',
+        strategy: 'Alavancar a liderança da marca no Nordeste para penetrar no mercado do Sudeste, que está em forte crescimento, visando atingir nosso KPI de market share na região.',
         rationale: 'Acelerar a entrada via canais estratégicos (food service, cafeterias) para capturar valor no mercado de maior poder aquisitivo do país.'
     },
     {
