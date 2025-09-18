@@ -20,6 +20,10 @@
               'accent-red': '#E74C3C',
             },
             keyframes: {
+              'fade-in': {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
               'fade-in-up': {
                 '0%': {
                   opacity: '0',
@@ -30,9 +34,21 @@
                   transform: 'translateY(0)',
                 },
               },
+               'slide-in-up': {
+                '0%': {
+                  opacity: '0',
+                  transform: 'translateY(100%)',
+                },
+                '100%': {
+                  opacity: '1',
+                  transform: 'translateY(0)',
+                },
+              },
             },
             animation: {
+              'fade-in': 'fade-in 0.6s ease-out forwards',
               'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
+              'slide-in-up': 'slide-in-up 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards',
             },
           },
         },
@@ -48,7 +64,7 @@
 }
 </script>
 </head>
-  <body class="bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+  <body class="bg-slate-100 dark:bg-slate-950 transition-colors duration-300">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

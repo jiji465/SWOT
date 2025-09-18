@@ -3,48 +3,47 @@ import type { SwotData, TowsStrategy, PresentationSlide } from './types';
 
 export const SWOT_DATA: SwotData = {
   strengths: {
-    title: "Forças (Strengths)",
+    title: "Forças",
     items: [
-      "Crescimento consistente de receita (crescimento de R$12 milhões em 2 anos).",
-      "Marca reconhecida no Nordeste e início de presença no Sudeste.",
-      "Crescimento constante da capacidade produtiva (7% em 2 anos)."
+      "Crescimento consistente de receita.",
+      "Marca reconhecida no Nordeste.",
+      "Crescimento da capacidade produtiva."
     ],
   },
   weaknesses: {
-    title: "Fraquezas (Weaknesses)",
+    title: "Fraquezas",
     items: [
-      "Margem operacional em queda (queda de 3% em 2 anos).",
-      "Dependência de insumos importados (amêndoa: aproximadamente 70%).",
-      "ERP antigo que limita gestão de estoque e planejamento.",
-      "Dependência de um único co-packer para iogurtes.",
+      "Margem operacional em queda.",
+      "Dependência de insumos importados.",
+      "ERP antigo e limitador.",
       "Alto turnover na fábrica (24%)."
     ],
   },
   opportunities: {
-    title: "Oportunidades (Opportunities)",
+    title: "Oportunidades",
     items: [
-      "Expansão do público flexitariano no Brasil.",
-      "ERPs em nuvem mais acessíveis; melhorias em fermentação/texturização.",
+      "Expansão do público flexitariano.",
+      "ERPs em nuvem mais acessíveis.",
       "Linhas de crédito acessíveis.",
-      "Potencial de aumentar a capacidade produtiva (em crescimento, mas ainda baixa)."
+      "Potencial de aumentar capacidade."
     ],
   },
   threats: {
-    title: "Ameaças (Threats)",
+    title: "Ameaças",
     items: [
-      "Câmbio volátil (impactando insumos importados).",
-      "Discussões regulatórias sobre o uso da palavra “leite” em bebidas vegetais.",
-      "Seca que pode afetar a produção de aveia nacional.",
-      "Consumidores sensíveis a preço e rótulos."
+      "Câmbio volátil.",
+      "Regulamentação da palavra “leite”.",
+      "Seca afetando produção de aveia.",
+      "Consumidores sensíveis a preço."
     ],
   },
 };
 
 export const STRATEGIC_PRIORITIES: string[] = [
-  "Ampliar sua rede de fornecedores de insumo e embalagem a fim de aumentar sua segurança operacional.",
-  "Reduzir custos e aumentar margem operacional (via eficiência logística, renegociação com fornecedores e atualização do ERP).",
-  "Diminuir dependência de insumos e parceiros únicos (diversificação de fornecedores e busca de novos co-packers).",
-  "Expandir a penetração no Sudeste (fortalecer marketing, degustações e parcerias com cafeterias e hotéis)."
+  "Ampliar a rede de fornecedores de insumos e embalagens.",
+  "Reduzir custos e aumentar a margem operacional.",
+  "Diminuir a dependência de parceiros únicos (co-packers).",
+  "Expandir a penetração de mercado no Sudeste."
 ];
 
 
@@ -87,15 +86,12 @@ export const TOWS_STRATEGIES: TowsStrategy[] = [
     }
 ];
 
-// FIX: By explicitly typing PRESENTATION_SLIDES with the PresentationSlide[] discriminated union, we enable TypeScript to correctly narrow the slide type in App.tsx's switch statement, resolving errors when accessing properties like 'category' and 'index'.
 export const PRESENTATION_SLIDES: PresentationSlide[] = [
   { type: 'intro', title: 'Apresentação de Análise Estratégica' },
-  { type: 'swot', category: 'strengths', title: 'Análise SWOT: Forças' },
-  { type: 'swot', category: 'weaknesses', title: 'Análise SWOT: Fraquezas' },
-  { type: 'swot', category: 'opportunities', title: 'Análise SWOT: Oportunidades' },
-  { type: 'swot', category: 'threats', title: 'Análise SWOT: Ameaças' },
+  { type: 'swot-matrix', title: 'Análise SWOT' },
   { type: 'priorities', title: 'Questões Estratégicas Prioritárias' },
-  ...TOWS_STRATEGIES.map((strategy, index) => ({
+  // FIX: Added an explicit return type to the map callback to ensure the created object conforms to the PresentationSlide union type.
+  ...TOWS_STRATEGIES.map((strategy, index): PresentationSlide => ({
     type: 'tows',
     index: index,
     title: `Estratégia TOWS: ${strategy.title.replace(' (Extra)', '')}`,
