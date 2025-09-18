@@ -38,7 +38,7 @@ export const PresentationFrame: React.FC<PresentationFrameProps> = ({
     <div className="min-h-screen flex flex-col font-sans p-4 md:p-8">
       
       <header className="h-16 flex items-center justify-between">
-        <h2 className="text-md font-semibold text-muted-foreground tracking-wider uppercase">{title}</h2>
+        <h2 className="text-lg font-semibold text-muted-foreground tracking-wider uppercase">{title}</h2>
         <span className="text-sm font-medium text-muted-foreground">
           {currentStep} / {totalSteps}
         </span>

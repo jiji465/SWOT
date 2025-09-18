@@ -144,7 +144,7 @@ const App: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-xl md:text-2xl text-slate-200 [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]"
+              className="text-2xl md:text-3xl text-slate-200 [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]"
             >
               Apresentação Interativa de Análise SWOT & TOWS
             </motion.p>
@@ -175,22 +175,30 @@ const App: React.FC = () => {
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-white [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Iniciativas Prioritárias (12 Meses)</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {STRATEGIC_PRIORITIES.map((priority, index) => (
-                    <motion.div 
-                      key={index} 
-                      className="bg-card text-card-foreground p-6 rounded-lg shadow-lg flex items-start space-x-4 border"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0, transition: { delay: index * 0.1 } }}
-                      exit={{ opacity: 0 }}
-                      whileHover={{ scale: 1.03, y: -5 }}
-                      transition={{ type: 'spring', stiffness: 300 }}
-                    >
-                      <div className="flex-shrink-0 text-primary mt-1">
-                          <CheckCircleIcon className="h-6 w-6 md:h-7 md:w-7" />
-                      </div>
-                      <p className="text-xl md:text-2xl">{priority}</p>
-                    </motion.div>
-                ))}
+                {STRATEGIC_PRIORITIES.map((priority, index) => {
+                    const match = priority.match(/(.*)\s\((KPI:.*)\)/);
+                    const mainText = match ? match[1].trim() : priority;
+                    const kpiText = match ? match[2].trim() : null;
+                    return (
+                        <motion.div 
+                          key={index} 
+                          className="bg-card text-card-foreground p-6 rounded-lg shadow-lg flex items-start space-x-4 border"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0, transition: { delay: index * 0.1 } }}
+                          exit={{ opacity: 0 }}
+                          whileHover={{ scale: 1.03, y: -5 }}
+                          transition={{ type: 'spring', stiffness: 300 }}
+                        >
+                          <div className="flex-shrink-0 text-primary mt-1">
+                              <CheckCircleIcon className="h-6 w-6 md:h-8 md:w-8" />
+                          </div>
+                          <div>
+                            <p className="text-xl md:text-2xl font-medium">{mainText}</p>
+                            {kpiText && <p className="text-lg md:text-xl text-muted-foreground mt-1">{kpiText}</p>}
+                          </div>
+                        </motion.div>
+                    )
+                })}
             </div>
           </div>
         );
@@ -214,7 +222,7 @@ const App: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-xl md:text-2xl text-slate-200 [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]"
+                  className="text-2xl md:text-3xl text-slate-200 [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]"
                 >
                   Perguntas e Respostas
                 </motion.p>

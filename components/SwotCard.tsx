@@ -59,7 +59,7 @@ export const SwotCard: React.FC<SwotQuadrantProps> = ({ title, items, icon, colo
         >
           {React.cloneElement(icon, { className: "h-7 w-7 sm:h-8 sm:w-8" })}
         </motion.div>
-        <h3 className="text-xl sm:text-2xl font-bold">{title}</h3>
+        <h3 className="text-2xl sm:text-3xl font-bold">{title}</h3>
       </div>
       <motion.ul 
         className="space-y-2"
@@ -70,7 +70,7 @@ export const SwotCard: React.FC<SwotQuadrantProps> = ({ title, items, icon, colo
         {items.map((item, index) => (
           <motion.li key={index} className="flex items-start" variants={itemVariants}>
             <span style={{ color }} className={`flex-shrink-0 font-semibold mr-2 mt-1`}>•</span>
-            <span className="text-muted-foreground text-base sm:text-lg">{item}</span>
+            <span className="text-muted-foreground text-lg sm:text-xl">{item}</span>
           </motion.li>
         ))}
       </motion.ul>

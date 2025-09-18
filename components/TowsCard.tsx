@@ -50,12 +50,12 @@ export const TowsCard: React.FC<TowsCardProps> = ({ strategy }) => {
           >
             {meta.icon}
           </motion.div>
-          <h4 className="text-2xl sm:text-4xl font-bold">{strategy.title}</h4>
+          <h4 className="text-3xl sm:text-4xl font-bold">{strategy.title}</h4>
         </div>
-        <p className="text-lg sm:text-2xl mb-4">{strategy.strategy}</p>
+        <p className="text-xl sm:text-2xl leading-snug mb-4">{strategy.strategy}</p>
       </div>
       <div className="mt-auto bg-muted/50 p-4 sm:p-6 border-t">
-        <p className="text-base sm:text-xl text-muted-foreground flex items-start">
+        <p className="text-lg sm:text-xl text-muted-foreground flex items-start">
           <span className="font-bold mr-2 text-foreground">👉 Racional:</span>
           <span>{strategy.rationale}</span>
         </p>
