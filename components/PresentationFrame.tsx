@@ -1,6 +1,6 @@
-
 import React from 'react';
-import { motion } from 'framer-motion';
+// FIX: Import Transition type from framer-motion to correctly type the buttonTransition object.
+import { motion, Transition } from 'framer-motion';
 import { ChevronLeftIcon, ChevronRightIcon } from './IconComponents';
 
 interface PresentationFrameProps {
@@ -25,6 +25,14 @@ export const PresentationFrame: React.FC<PresentationFrameProps> = ({
   isPrevDisabled
 }) => {
   const progressPercentage = totalSteps > 1 ? ((currentStep -1) / (totalSteps - 1)) * 100 : 0;
+
+  // FIX: Explicitly type buttonTransition with the Transition type. This resolves the TypeScript error
+  // where the 'type' property was being inferred as a generic 'string' instead of the required literal 'spring'.
+  const buttonTransition: Transition = {
+    type: 'spring',
+    stiffness: 500,
+    damping: 30,
+  };
 
   return (
     <div className="min-h-screen flex flex-col font-sans p-4 md:p-8">
@@ -60,6 +68,7 @@ export const PresentationFrame: React.FC<PresentationFrameProps> = ({
             aria-label="Previous slide"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            transition={buttonTransition}
           >
             <ChevronLeftIcon className="h-5 w-5" />
             <span className="mr-2">Anterior</span>
@@ -72,6 +81,7 @@ export const PresentationFrame: React.FC<PresentationFrameProps> = ({
             aria-label="Next slide"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            transition={buttonTransition}
           >
             <span className="ml-2">Próximo</span>
             <ChevronRightIcon className="h-5 w-5"/>

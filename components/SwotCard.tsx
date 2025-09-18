@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 interface SwotQuadrantProps {
   title: string;
@@ -9,6 +8,7 @@ interface SwotQuadrantProps {
   color: string;
   isVisible: boolean;
   position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+  iconVariants: Variants;
 }
 
 const containerVariants = {
@@ -26,7 +26,7 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
-export const SwotCard: React.FC<SwotQuadrantProps> = ({ title, items, icon, color, isVisible, position }) => {
+export const SwotCard: React.FC<SwotQuadrantProps> = ({ title, items, icon, color, isVisible, position, iconVariants }) => {
 
   const positionVariants = {
     'top-left': { x: -20, y: -20 },
@@ -39,7 +39,7 @@ export const SwotCard: React.FC<SwotQuadrantProps> = ({ title, items, icon, colo
 
   return (
     <motion.div 
-      className={`flex flex-col bg-card text-card-foreground rounded-lg shadow-lg p-6 border-l-4`}
+      className={`flex flex-col bg-card text-card-foreground rounded-lg shadow-lg p-4 sm:p-6 border-l-4`}
       style={{ borderLeftColor: color }}
       initial={{ opacity: 0, x: initialPos.x, y: initialPos.y }}
       animate={{
@@ -50,10 +50,16 @@ export const SwotCard: React.FC<SwotQuadrantProps> = ({ title, items, icon, colo
       transition={{ type: "spring", stiffness: 260, damping: 20 }}
     >
       <div className="flex items-center mb-4">
-        <div style={{ color }} className={`mr-3`}>
-          {React.cloneElement(icon, { className: "h-7 w-7" })}
-        </div>
-        <h3 className="text-xl font-bold">{title}</h3>
+        <motion.div 
+            style={{ color }} 
+            className={`mr-3`}
+            variants={iconVariants}
+            initial="hidden"
+            animate={isVisible ? "visible" : "hidden"}
+        >
+          {React.cloneElement(icon, { className: "h-7 w-7 sm:h-8 sm:w-8" })}
+        </motion.div>
+        <h3 className="text-xl sm:text-2xl font-bold">{title}</h3>
       </div>
       <motion.ul 
         className="space-y-2"
@@ -64,7 +70,7 @@ export const SwotCard: React.FC<SwotQuadrantProps> = ({ title, items, icon, colo
         {items.map((item, index) => (
           <motion.li key={index} className="flex items-start" variants={itemVariants}>
             <span style={{ color }} className={`flex-shrink-0 font-semibold mr-2 mt-1`}>•</span>
-            <span className="text-muted-foreground text-base">{item}</span>
+            <span className="text-muted-foreground text-base sm:text-lg">{item}</span>
           </motion.li>
         ))}
       </motion.ul>

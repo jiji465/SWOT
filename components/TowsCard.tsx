@@ -1,4 +1,3 @@
-
 import React from 'react';
 import type { TowsStrategy } from '../types';
 import { SOIcon, STIcon, WOIcon, WTIcon } from './IconComponents';
@@ -12,22 +11,22 @@ const strategyMeta = {
   SO: {
     color: 'text-accent-green',
     gradient: 'from-accent-green/10 to-transparent',
-    icon: <SOIcon className="h-10 w-10"/>,
+    icon: <SOIcon className="h-10 w-10 sm:h-12 sm:w-12"/>,
   },
   ST: {
     color: 'text-accent-blue',
     gradient: 'from-accent-blue/10 to-transparent',
-    icon: <STIcon className="h-10 w-10"/>,
+    icon: <STIcon className="h-10 w-10 sm:h-12 sm:w-12"/>,
   },
   WO: {
     color: 'text-accent-orange',
     gradient: 'from-accent-orange/10 to-transparent',
-    icon: <WOIcon className="h-10 w-10"/>,
+    icon: <WOIcon className="h-10 w-10 sm:h-12 sm:w-12"/>,
   },
   WT: {
     color: 'text-accent-red',
     gradient: 'from-accent-red/10 to-transparent',
-    icon: <WTIcon className="h-10 w-10"/>,
+    icon: <WTIcon className="h-10 w-10 sm:h-12 sm:w-12"/>,
   },
 };
 
@@ -41,17 +40,22 @@ export const TowsCard: React.FC<TowsCardProps> = ({ strategy }) => {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ type: 'spring', stiffness: 260, damping: 20 }}
     >
-      <div className={`p-8 bg-gradient-to-br ${meta.gradient}`}>
-        <div className="flex items-center mb-4">
-          <div className={`${meta.color} mr-4`}>
+      <div className={`p-6 sm:p-8 bg-gradient-to-br ${meta.gradient}`}>
+        <div className="flex items-center mb-6">
+          <motion.div 
+            className={`${meta.color} mr-4`}
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2, type: 'spring', stiffness: 260, damping: 15 }}
+          >
             {meta.icon}
-          </div>
-          <h4 className="text-3xl font-bold">{strategy.title}</h4>
+          </motion.div>
+          <h4 className="text-2xl sm:text-4xl font-bold">{strategy.title}</h4>
         </div>
-        <p className="text-xl mb-4">{strategy.strategy}</p>
+        <p className="text-lg sm:text-2xl mb-4">{strategy.strategy}</p>
       </div>
-      <div className="mt-auto bg-muted/50 p-6 border-t">
-        <p className="text-lg text-muted-foreground flex items-start">
+      <div className="mt-auto bg-muted/50 p-4 sm:p-6 border-t">
+        <p className="text-base sm:text-xl text-muted-foreground flex items-start">
           <span className="font-bold mr-2 text-foreground">👉 Racional:</span>
           <span>{strategy.rationale}</span>
         </p>

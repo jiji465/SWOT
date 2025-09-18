@@ -1,21 +1,18 @@
-
 import React, { useState, useEffect, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { SWOT_DATA, STRATEGIC_PRIORITIES, TOWS_STRATEGIES, PRESENTATION_SLIDES } from './constants';
 import { SwotCard } from './components/SwotCard';
 import { TowsCard } from './components/TowsCard';
 import { Header } from './components/Header';
 import { PresentationFrame } from './components/PresentationFrame';
 import { DynamicBackground } from './components/DynamicBackground';
-import { AiChat } from './components/AiChat';
 import { SettingsPanel } from './components/SettingsPanel';
 import { 
   LightbulbIcon, 
   ThumbsUpIcon, 
   ThumbsDownIcon, 
   AlertTriangleIcon,
-  CheckCircleIcon,
-  SparklesIcon
+  CheckCircleIcon
 } from './components/IconComponents';
 import { PresentationSlide, SwotColors } from './types';
 
@@ -24,7 +21,6 @@ const App: React.FC = () => {
   const [subStep, setSubStep] = useState(0);
   const [animationKey, setAnimationKey] = useState(0);
   const [backgroundKey, setBackgroundKey] = useState('intro');
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [direction, setDirection] = useState(0);
 
@@ -92,7 +88,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (isChatOpen || isSettingsOpen) return;
+      if (isSettingsOpen) return;
       if (event.key === 'ArrowRight' && currentStep < totalSteps) {
         handleNext();
       } else if (event.key === 'ArrowLeft' && currentStep > 1) {
@@ -103,7 +99,7 @@ const App: React.FC = () => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [slideIndex, subStep, isChatOpen, isSettingsOpen]);
+  }, [slideIndex, subStep, isSettingsOpen]);
 
   const slideVariants = {
     hidden: (direction: number) => ({
@@ -120,14 +116,38 @@ const App: React.FC = () => {
     }),
   };
 
+  const iconVariants: Variants = {
+    hidden: { scale: 0.5, opacity: 0, rotate: -15 },
+    visible: { 
+      scale: 1, 
+      opacity: 1, 
+      rotate: 0,
+      transition: { type: "spring", stiffness: 260, damping: 20, delay: 0.3 }
+    }
+  };
+
   const renderSlideContent = () => {
     const slide = PRESENTATION_SLIDES[slideIndex];
     switch (slide.type) {
       case 'intro':
         return (
           <div className="text-center">
-            <h1 className="text-6xl font-bold text-white mb-4 [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Análise Estratégica</h1>
-            <p className="text-2xl text-slate-200 [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]">Apresentação Interativa de Análise SWOT & TOWS</p>
+            <motion.h1 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-4xl md:text-6xl font-bold text-white mb-4 [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]"
+            >
+              Análise Estratégica
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-xl md:text-2xl text-slate-200 [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]"
+            >
+              Apresentação Interativa de Análise SWOT & TOWS
+            </motion.p>
           </div>
         );
       
@@ -140,12 +160,12 @@ const App: React.FC = () => {
         };
         return (
             <div>
-                <h2 className="text-4xl font-bold text-center mb-10 text-white [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Matriz SWOT</h2>
+                <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-white [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Matriz SWOT</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <SwotCard isVisible={subStep >= 0} position={swotConfig.strengths.position} title={swotConfig.strengths.data.title} items={swotConfig.strengths.data.items} icon={swotConfig.strengths.icon} color={swotConfig.strengths.color} />
-                    <SwotCard isVisible={subStep >= 1} position={swotConfig.weaknesses.position} title={swotConfig.weaknesses.data.title} items={swotConfig.weaknesses.data.items} icon={swotConfig.weaknesses.icon} color={swotConfig.weaknesses.color} />
-                    <SwotCard isVisible={subStep >= 2} position={swotConfig.opportunities.position} title={swotConfig.opportunities.data.title} items={swotConfig.opportunities.data.items} icon={swotConfig.opportunities.icon} color={swotConfig.opportunities.color} />
-                    <SwotCard isVisible={subStep >= 3} position={swotConfig.threats.position} title={swotConfig.threats.data.title} items={swotConfig.threats.data.items} icon={swotConfig.threats.icon} color={swotConfig.threats.color} />
+                    <SwotCard isVisible={subStep >= 0} position={swotConfig.strengths.position} title={swotConfig.strengths.data.title} items={swotConfig.strengths.data.items} icon={swotConfig.strengths.icon} color={swotConfig.strengths.color} iconVariants={iconVariants} />
+                    <SwotCard isVisible={subStep >= 1} position={swotConfig.weaknesses.position} title={swotConfig.weaknesses.data.title} items={swotConfig.weaknesses.data.items} icon={swotConfig.weaknesses.icon} color={swotConfig.weaknesses.color} iconVariants={iconVariants} />
+                    <SwotCard isVisible={subStep >= 2} position={swotConfig.opportunities.position} title={swotConfig.opportunities.data.title} items={swotConfig.opportunities.data.items} icon={swotConfig.opportunities.icon} color={swotConfig.opportunities.color} iconVariants={iconVariants} />
+                    <SwotCard isVisible={subStep >= 3} position={swotConfig.threats.position} title={swotConfig.threats.data.title} items={swotConfig.threats.data.items} icon={swotConfig.threats.icon} color={swotConfig.threats.color} iconVariants={iconVariants} />
                 </div>
             </div>
         );
@@ -153,7 +173,7 @@ const App: React.FC = () => {
       case 'priorities':
         return (
           <div>
-            <h2 className="text-4xl font-bold text-center mb-10 text-white [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Iniciativas Prioritárias (12 Meses)</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-white [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Iniciativas Prioritárias (12 Meses)</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {STRATEGIC_PRIORITIES.map((priority, index) => (
                     <motion.div 
@@ -162,11 +182,13 @@ const App: React.FC = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0, transition: { delay: index * 0.1 } }}
                       exit={{ opacity: 0 }}
+                      whileHover={{ scale: 1.03, y: -5 }}
+                      transition={{ type: 'spring', stiffness: 300 }}
                     >
                       <div className="flex-shrink-0 text-primary mt-1">
-                          <CheckCircleIcon className="h-7 w-7" />
+                          <CheckCircleIcon className="h-6 w-6 md:h-7 md:w-7" />
                       </div>
-                      <p className="text-xl">{priority}</p>
+                      <p className="text-xl md:text-2xl">{priority}</p>
                     </motion.div>
                 ))}
             </div>
@@ -180,8 +202,22 @@ const App: React.FC = () => {
       case 'conclusion':
         return (
             <div className="text-center">
-                <h1 className="text-6xl font-bold text-white mb-4 [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]">Obrigado</h1>
-                <p className="text-2xl text-slate-200 [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]">Perguntas e Respostas</p>
+                <motion.h1 
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-4xl md:text-6xl font-bold text-white mb-4 [text-shadow:_0_2px_4px_rgb(0_0_0_/_40%)]"
+                >
+                  Obrigado
+                </motion.h1>
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="text-xl md:text-2xl text-slate-200 [text-shadow:_0_1px_2px_rgb(0_0_0_/_30%)]"
+                >
+                  Perguntas e Respostas
+                </motion.p>
             </div>
         );
 
@@ -221,30 +257,6 @@ const App: React.FC = () => {
         </AnimatePresence>
       </PresentationFrame>
       
-      <motion.button
-          onClick={() => setIsChatOpen(true)}
-          className="fixed bottom-6 right-6 z-30 h-16 w-16 bg-primary rounded-full shadow-lg flex items-center justify-center text-primary-foreground"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          aria-label="Ask AI"
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1, transition: { delay: 0.5 } }}
-      >
-          <SparklesIcon className="h-8 w-8" />
-      </motion.button>
-
-      <AnimatePresence>
-          {isChatOpen && (
-              <AiChat 
-                  isOpen={isChatOpen} 
-                  onClose={() => setIsChatOpen(false)} 
-                  swotData={SWOT_DATA}
-                  towsStrategies={TOWS_STRATEGIES}
-                  strategicPriorities={STRATEGIC_PRIORITIES}
-              />
-          )}
-      </AnimatePresence>
-
       <SettingsPanel
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
