@@ -42,7 +42,6 @@ export const SWOT_DATA: SwotData = {
 export const STRATEGIC_PRIORITIES: string[] = [
   "Ampliar sua rede de fornecedores de insumo e embalagem a fim de aumentar sua segurança operacional.",
   "Reduzir custos e aumentar margem operacional (via eficiência logística, renegociação com fornecedores e atualização do ERP).",
-  "Diminuir dependência de insumos e parceiros únicos (diversificação de fornecedores e busca de novos co-packers).",
   "Expandir a penetração no Sudeste (fortalecer marketing, degustações e parcerias com cafeterias e hotéis)."
 ];
 
